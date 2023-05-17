@@ -40,56 +40,8 @@
    target environment.  */
 
 __rt_stkovf_split_small:
-        mov     ip,sp   @ Ensure we can calculate the stack required
-        @ and fall through to...
+        mov ip, sp
 __rt_stkovf_split_big:
-        @ in:   sp = current stack-pointer (beneath stack-limit)
-        @       sl = current stack-limit
-        @       ip = low stack point we require for the current function
-        @       lr = return address into the current function
-        @       fp = frame-pointer
-        @               original sp --> +----------------------------------+
-        @                               | pc (12 ahead of PCS entry store) |
-        @               current fp ---> +----------------------------------+
-        @                               | lr (on entry) pc (on exit)       |
-        @                               +----------------------------------+
-        @                               | sp ("original sp" on entry)      |
-        @                               +----------------------------------+
-        @                               | fp (on entry to function)        |
-        @                               +----------------------------------+
-        @                               |                                  |
-        @                               | ..argument and work registers..  |
-        @                               |                                  |
-        @               current sp ---> +----------------------------------+
-        @
-        @ The "current sl" is somewhere between "original sp" and "current sp"
-        @ but above "true sl". The "current sl" should be at least 256bytes
-        @ above the "true sl". The 256byte stack guard should be large enough
-        @ to deal with the worst case function entry stacking (160bytes) plus
-        @ the stack overflow handler stacking requirements, plus the stack
-        @ required for the memory allocation routines.
-        @
-        @ Normal PCS entry (before stack overflow check) can stack 16
-        @ standard registers (64bytes) and 8 floating point registers
-        @ (96bytes). This gives a minimum stack guard of 160bytes (excluding
-        @ the stack required for the code). (Actually only a maximum of
-        @ 14standard registers are ever stacked on entry to a function).
-        @
-        @ NOTE: Structure returns are performed by the caller allocating a
-        @       dummy space on the stack and passing in a "phantom" arg1 into
-        @       the function. This means that we do not need to worry about
-        @       preserving the stack under "sp" even on function return.
-        @ 
-        @        Code should never poke values beneath sp. The sp register
-        @        should always be "dropped" first to cover the data. This
-        @        protects the data against any events that may try and use
-        @        the stack.
-
-        SUB     ip, sp, ip      @ extra stack required for function
-        @ Add stack extension code here.  If desired a new stack chunk
-        @ can be allocated, and the register state updated suitably.
-
-        @ We now know how much extra stack the function requires.
-        @ Terminate the program for the moment:
+        SUB     ip, sp, ip
         swi     SWI_Exit
 #endif
