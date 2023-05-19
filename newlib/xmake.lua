@@ -27,13 +27,9 @@ target("newlib")
 
     add_configfiles("_newlib_version.hin", {filename = "_newlib_version.h"})
     add_includedirs("$(buildir)", {public = true})
-    set_toolchains("switch-llvm")
 
 target("libm")
     set_kind("static")
-
-    set_plat("switch")
-    set_arch("aarch64")
 
     add_files("libm/common/**.c")
     add_files("libm/complex/**.c")
@@ -51,13 +47,9 @@ target("libm")
     set_exceptions("no-cxx")
 
     add_deps("newlib")
-    set_toolchains("switch-llvm")
 
 target("libc")
     set_kind("static")
-
-    set_plat("switch")
-    set_arch("aarch64")
 
     add_files("libc/argz/**.c")
     add_files("libc/ssp/*.c")
@@ -86,4 +78,3 @@ target("libc")
     add_headerfiles("libc/sys/arm/(sys/*.h)")
 
     add_deps("newlib", "libm")
-    set_toolchains("switch-llvm")
