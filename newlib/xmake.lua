@@ -23,7 +23,7 @@ target("newlib")
     set_configvar("__NEWLIB_MINOR__", 3)
     set_configvar("__NEWLIB_PATCHLEVEL__", 0)
 
-    add_defines("_LIBC", "__NO_SYSCALLS__", "__DYNAMIC_REENT__", "REENTRANT_SYSCALLS_PROVIDED", "_HAVE_INIT_FINI", "HAVE_CONFIG_H", "__DEFAULT_UTF8__", {public = true})
+    add_defines("__NO_SYSCALLS__", "__DYNAMIC_REENT__", "REENTRANT_SYSCALLS_PROVIDED", "_HAVE_INIT_FINI", "HAVE_CONFIG_H", "__DEFAULT_UTF8__", {public = true})
 
     add_configfiles("_newlib_version.hin", {filename = "_newlib_version.h"})
     add_includedirs("$(buildir)", {public = true})

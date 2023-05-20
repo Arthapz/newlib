@@ -20,7 +20,6 @@ target("libgloss")
     add_configfiles("config.h.in")
     add_includedirs("$(buildir)", {public = true})
     add_includedirs(".", {public = true})
-    set_toolchains("switch-llvm")
 
 local modules = {
     librdimon = {
