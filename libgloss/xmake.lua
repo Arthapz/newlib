@@ -42,9 +42,6 @@ for name, infos in pairs(modules) do
     target(name)
         set_kind("static")
 
-        set_plat("switch")
-        set_arch("aarch64")
-
         for _, filetype in ipairs(infos.files) do
             add_files(path.join(infos.dir, filetype))
         end
@@ -64,14 +61,10 @@ for name, infos in pairs(modules) do
         end
 
         add_deps("libgloss")
-        set_toolchains("switch-llvm")
 end
 
 target("libpthread")
     set_kind("static")
-
-    set_plat("switch")
-    set_arch("aarch64")
 
     add_files("libsysbase/pthread.c")
 
@@ -84,4 +77,3 @@ target("libpthread")
     add_defines("_BUILDING_LIBSYSBASE")
 
     add_deps("libgloss")
-    set_toolchains("switch-llvm")
