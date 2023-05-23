@@ -27,6 +27,8 @@ target("newlib")
     add_defines("_GNU_SOURCE=1", "_LIBC", "_NEWLIB_VERSION=4.3.0", "__NEWLIB__=4", {public = true})
 
     add_configfiles("_newlib_version.hin", {filename = "_newlib_version.h"})
+
+    add_headerfiles("$(buildir)/(**.h)")
     add_includedirs("$(buildir)", {public = true})
 
 target("libm")
