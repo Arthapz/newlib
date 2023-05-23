@@ -23,13 +23,14 @@ target("newlib")
     set_configvar("__NEWLIB_MINOR__", 3)
     set_configvar("__NEWLIB_PATCHLEVEL__", 0)
 
-    add_defines("__NO_SYSCALLS__", "__DYNAMIC_REENT__", "REENTRANT_SYSCALLS_PROVIDED", "_HAVE_INIT_FINI", "HAVE_CONFIG_H", "__DEFAULT_UTF8__", {public = true})
+    add_defines("__NO_SYSCALLS__", "__DYNAMIC_REENT__", "REENTRANT_SYSCALLS_PROVIDED", "_HAVE_INIT_FINI", "HAVE_CONFIG_H", "__DEFAULT_UTF8__")
+    add_defines("_GNU_SOURCE=1", "_LIBC", "_NEWLIB_VERSION=4.3.0", "__NEWLIB__=4", {public = true})
 
     add_configfiles("_newlib_version.hin", {filename = "_newlib_version.h"})
     add_includedirs("$(buildir)", {public = true})
 
 target("libm")
-    set_kind("static")
+    set_kind("$(kind)")
 
     add_files("libm/common/**.c")
     add_files("libm/complex/**.c")
@@ -37,6 +38,7 @@ target("libm")
     add_files("libm/machine/aarch64/*.c")
     add_files("libm/math/**.c")
 
+    add_defines("__NO_SYSCALLS__", "__DYNAMIC_REENT__", "REENTRANT_SYSCALLS_PROVIDED", "_HAVE_INIT_FINI", "HAVE_CONFIG_H", "__DEFAULT_UTF8__")
     add_includedirs("libm/common")
 
     set_prefixname("")
@@ -45,10 +47,15 @@ target("libm")
 
     set_exceptions("no-cxx")
 
+    add_sysincludedirs("libc/machine/aarch64/", {public = true})
+    add_sysincludedirs("libc/machine/aarch64/sys", {public = true})
+    add_sysincludedirs("libc/sys/arm", {public = true})
+    add_sysincludedirs("libc/include", {public = true})
+
     add_deps("newlib")
 
 target("libc")
-    set_kind("static")
+    set_kind("$(kind)")
 
     add_files("libc/argz/**.c")
     add_files("libc/ssp/*.c")
@@ -67,6 +74,8 @@ target("libc")
     add_files("libc/time/*.c")
     add_files("libc/signal/*.c")
 
+    add_defines("__NO_SYSCALLS__", "__DYNAMIC_REENT__", "REENTRANT_SYSCALLS_PROVIDED", "_HAVE_INIT_FINI", "HAVE_CONFIG_H", "__DEFAULT_UTF8__")
+
     set_prefixname("")
 
     set_extension(".a")
@@ -75,5 +84,10 @@ target("libc")
 
     add_headerfiles("libc/include/(**.h)")
     add_headerfiles("libc/sys/arm/(sys/*.h)")
+
+    add_sysincludedirs("libc/machine/aarch64/", {public = true})
+    add_sysincludedirs("libc/machine/aarch64/sys", {public = true})
+    add_sysincludedirs("libc/sys/arm", {public = true})
+    add_sysincludedirs("libc/include", {public = true})
 
     add_deps("newlib", "libm")
