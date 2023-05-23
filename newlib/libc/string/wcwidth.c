@@ -230,9 +230,9 @@ __wcwidth (const wint_t ucs)
 }
 
 int
-wcwidth (const wint_t wc)
+wcwidth (const wchar_t wc)
 {
-  wint_t wi = wc;
+  wchar_t wi = wc;
 
 #ifdef _MB_CAPABLE
   wi = _jp2uc (wi);
