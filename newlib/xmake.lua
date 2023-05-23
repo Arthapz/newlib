@@ -38,8 +38,6 @@ target("libm")
     add_files("libm/math/**.c")
 
     add_includedirs("libm/common")
-    add_sysincludedirs("libc/machine/aarch64/")
-    add_sysincludedirs("libc/machine/aarch64/sys")
 
     set_prefixname("")
 
