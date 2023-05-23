@@ -39,6 +39,7 @@ target("libm")
 
     add_includedirs("libm/common")
     add_sysincludedirs("libc/machine/aarch64/")
+    add_sysincludedirs("libc/machine/aarch64/sys")
 
     set_prefixname("")
 
