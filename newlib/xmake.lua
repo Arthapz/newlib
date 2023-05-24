@@ -76,7 +76,6 @@ target("libc")
     add_files("libc/time/*.c")
     add_files("libc/signal/*.c")
     add_files("libc/sys/arm/*.c")
-    add_files("libc/sys/arm/*.S")
 
     add_defines("__NO_SYSCALLS__", "__DYNAMIC_REENT__", "REENTRANT_SYSCALLS_PROVIDED", "_HAVE_INIT_FINI", "HAVE_CONFIG_H", "__DEFAULT_UTF8__")
 
