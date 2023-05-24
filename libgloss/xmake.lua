@@ -19,6 +19,11 @@ target("libgloss")
 
     add_headerfiles("$(buildir)/(**.hpp)")
 
+    add_sysincludedirs("../newlib/libc/machine/aarch64/", {public = true})
+    add_sysincludedirs("../newlib/libc/machine/aarch64/sys", {public = true})
+    add_sysincludedirs("../newlib/libc/sys/arm", {public = true})
+    add_sysincludedirs("../newlib/libc/include", {public = true})
+
     add_configfiles("config.h.in")
     add_includedirs("$(buildir)", {public = true})
     add_includedirs(".", {public = true})
