@@ -17,6 +17,8 @@ target("libgloss")
 
     add_defines("HAVE_CONFIG_H", {public = true})
 
+    add_headerfiles("$(buildir)/(**.hpp)")
+
     add_configfiles("config.h.in")
     add_includedirs("$(buildir)", {public = true})
     add_includedirs(".", {public = true})
