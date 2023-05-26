@@ -33,7 +33,6 @@ target("newlib")
 
 target("libm")
     set_kind("$(kind)")
-    add_rules("mode.debug", "mode.release")
 
     add_files("libm/common/**.c")
     add_files("libm/complex/**.c")
@@ -59,7 +58,6 @@ target("libm")
 
 target("libc")
     set_kind("$(kind)")
-    add_rules("mode.debug", "mode.release")
 
     add_files("libc/argz/**.c")
     add_files("libc/ssp/*.c")

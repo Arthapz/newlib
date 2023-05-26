@@ -48,7 +48,6 @@ local modules = {
 for name, infos in pairs(modules) do
     target(name)
         set_kind("$(kind)")
-        add_rules("mode.debug", "mode.release")
 
         for _, filetype in ipairs(infos.files) do
             add_files(path.join(infos.dir, filetype))
