@@ -68,6 +68,7 @@ for name, infos in pairs(modules) do
         end
 
         add_deps("libgloss")
+        add_packages("switch-llvm")
 end
 
 target("libpthread")
@@ -84,3 +85,4 @@ target("libpthread")
     add_defines("_BUILDING_LIBSYSBASE")
 
     add_deps("libgloss")
+    add_packages("switch-llvm")

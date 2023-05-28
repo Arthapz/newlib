@@ -4,6 +4,8 @@ local flags = {
     "-Wno-int-conversion"
 }
 
+add_requires("switch-llvm", {host = true})
+
 add_cxflags(flags)
 add_asflags(flags)
 

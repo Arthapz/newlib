@@ -34,6 +34,8 @@ target("newlib")
 target("libm")
     set_kind("$(kind)")
 
+    add_packages("switch-llvm")
+
     add_files("libm/common/**.c")
     add_files("libm/complex/**.c")
     add_files("libm/fenv/**.c")
@@ -58,6 +60,8 @@ target("libm")
 
 target("libc")
     set_kind("$(kind)")
+
+    add_packages("switch-llvm")
 
     add_files("libc/argz/**.c")
     add_files("libc/ssp/*.c")
